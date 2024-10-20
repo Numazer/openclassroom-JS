@@ -3,31 +3,41 @@ const phrases = ['pas de panique', 'ok lets go', 'on est bon']
 
 let score = 0
 
-let choisir = prompt(" voulez vous un succcession de phrases ou de mots ? ")
+   function afficherResultat(nbDeMotsProposés, score){
+        console.log("votre score est de : " + score + " sur trois" + nbDeMotsProposés )
+    }
+
+    function choisirMotsOuPhrases(){
+        let choisir = prompt(" voulez vous une succcession de phrases ou de mots ? ")
     while(choisir !== "mots" && choisir !== "phrases"){
-        let choisir = prompt(" voulez vous un succcession de phrases ou de mots ? ")
+        let choisir = prompt(" voulez vous une succcession de phrases ou de mots ? ")
+    }
+    return choisir
     }
 
-console.log("choix")
-
-if(choisir === "mots") {
-    for (let i = 0; i < mots.length; i++) {
-        let motsutilisateur = prompt("entrez le mot : " + mots[i])
-        if (motsutilisateur === mots[i]) {
-            score++
+    function boucleDeJeu (listeProposition){
+            for (let i = 0; i < listeProposition.length; i++) {
+                let motsutilisateur = prompt("entrez le mot : " + listeProposition[i])
+                if (motsutilisateur === listeProposition[i]) {
+                    score++
+                }
         }
+        return score
     }
-    
-}
 
-if(choisir ==="phrases"){
-    for (let i = 0; i < phrases.length; i++) {
-        let phrasesutilisateur = prompt("entrez le phrase : " + phrases[i])
-        if (phrasesutilisateur === phrases[i]) {
-            score++
+    function lancerJeu(){
+        let choisir = choisirMotsOuPhrases()
+        let score = 0
+        let nbDeMotsProposés = 0
+
+        if (choisir === 'mots') {
+            boucleDeJeu(mots)
+            nbDeMotsProposés = mots.length
+        } else {
+            boucleDeJeu(phrases)
+            nbDeMotsProposés = phrases.length
         }
+        afficherResultat(score, nbDeMotsProposés)
     }
-}
 
-
-    console.log("votre score est de : " + score + " sur trois")
+lancerJeu();
